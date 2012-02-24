@@ -1,0 +1,66 @@
+/* ----------------------------------------------------------------------------
+ *         ATMEL Microcontroller Software Support 
+ * ----------------------------------------------------------------------------
+ * Copyright (c) 2008, Atmel Corporation
+ *
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are met:
+ *
+ * - Redistributions of source code must retain the above copyright notice,
+ * this list of conditions and the disclaimer below.
+ *
+ * Atmel's name may not be used to endorse or promote products derived from
+ * this software without specific prior written permission.
+ *
+ * DISCLAIMER: THIS SOFTWARE IS PROVIDED BY ATMEL "AS IS" AND ANY EXPRESS OR
+ * IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
+ * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT ARE
+ * DISCLAIMED. IN NO EVENT SHALL ATMEL BE LIABLE FOR ANY DIRECT, INDIRECT,
+ * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+ * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA,
+ * OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+ * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+ * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+ * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ * ----------------------------------------------------------------------------
+ */
+
+//------------------------------------------------------------------------------
+/// \dir
+/// !!!Purpose
+///
+/// This directory provides a library of re-usable code to build %Norflash 
+/// applications with Atmel AT91 microcontrollers. 
+///
+/// !!!Contents
+/// The %norflash driver interface is implemented to support four layers of 
+/// abstractions such CFI level, API level, low-level flash device driver and
+/// Hardware-specific bus operations. Users can focus on writing the high-level
+/// code required for their particular applications.
+///
+/// - CFI interface : Common Flash Memory Interface(CFI) allow in-system or 
+///              programmer reading of flash device characteristics. It
+///              provides basic fuction NorFlash_CFI_Detect() to detect %flash 
+///              chip by CFI, it also includes some general functions to get 
+///              %flash device informations like memory size, byte and word 
+///              configuration, block configurations and so on.
+/// - API layer: API layer consists of several functions that allow user to 
+///              do operations with flash in a unified way. As a result, 
+///              future device changes will not necessarily lead to the code 
+///              changes in the application environments. In this %norflash 
+///              library we support AMD and INTEL command set.
+/// - Low-level driver: It implement procedures to program basic operations
+///              described in the datasheets for flash devices. All low-level 
+///              functions invkes the related supported program algorithm 
+///              (AMD/Inter) which is auto detect by CFI before. The low-level 
+///              code takes care of issuing the correct sequences of write/read
+///              operations for each command.
+/// - Hardware-specific bus operations: The low-level code requires hardware-
+///             specific read/write Bus operations to communicate with the 
+///             %norflash devices. The implementation of these operations is
+///             hardware-platform dependent as it depends on the microprocessor
+///             on the location of the memory in the microprocessor's address
+///             space. 
+//------------------------------------------------------------------------------

@@ -1,0 +1,24 @@
+
+A gcc build setup for the SAM3U-EK board
+Pat Hickey
+Feb 2012
+
+REQUIRMENTS
+
+* arm-none-eabi toolchain from CodeSourcery/Mentor : https://sourcery.mentor.com/sgpp/lite/arm/portal/release2032
+
+* openocd 0.5.0 : http://sourceforge.net/projects/openocd/
+  Build with ./configure --enable-jlink
+  You'll probably need to install libusb-dev (apt-get/ubuntu) or libusb-devel (yum/fedora) first.
+  * openocd.cfg file included in repository root 
+  To see openocd connects to the chip:
+  * Run openocd from a terminal at repository root (openocd.cfg present)
+  * In another terminal, $ telnet localhost 4444
+  * In telnet, type "reset", see the chip do as you asked
+
+RESOURCES
+
+Build flags based on Atmel Application Note "Getting started with SAM3U Microcontrollers" (http://www.atmel.com/Images/doc11020.pdf)
+
+SAM3U family datasheet, SAM3U-EK user guide included in docs/
+

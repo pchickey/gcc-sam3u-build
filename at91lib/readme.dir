@@ -1,0 +1,16 @@
+//------------------------------------------------------------------------------
+/// \dir
+/// !Purpose
+///
+/// This directory contains several sub-directories, each one corresponding to
+/// a category of code modules.
+///
+/// At the moment, there is five different categories:
+/// - boards: everything board-related.
+/// - components: external components used by AT91 chips (like DACs, etc.) but
+///               not directly integrated.
+/// - peripherals: internal peripherals of AT91 chips.
+/// - usb: everything USB-related (including USB peripheral code).
+/// - utility: set of small utility files, such as LEDs or debug traces.
+//------------------------------------------------------------------------------
+
