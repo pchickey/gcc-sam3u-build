@@ -75,8 +75,8 @@
 
 // Select the trace interface
 // (add usart.o file in makefile if Usart interface is selected)
-//#define TRACE_DBGU 1
-#define TRACE_USART_0 1
+#define TRACE_DBGU 1
+//#define TRACE_USART_0 1
 //#define TRACE_USART_1 1
 //#define TRACE_USART_2 1
 
