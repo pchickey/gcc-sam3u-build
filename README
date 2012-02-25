@@ -3,18 +3,54 @@ A gcc build setup for the SAM3U-EK board
 Pat Hickey
 Feb 2012
 
+CONTENTS
+
+ * Atmel at91lib Softpak 1.6
+   * files in boards/ deleted except for boards/at91sam3u-ek
+   * components/ deleted
+ * openocd.cfg script for sam3u-ek board and Segger/Atmel SAM-ICE jtag debugger
+ * simple: a program to test your build & debugging environment
+
+LICENSE
+
+ * The Atmel at91lib software license has a liberal redistributable license
+   provided at at91lib/at91lib.dir
+ * Datasheets in docs/ are copyright Atmel
+ * All software written by Pat Hickey is placed in the public domain.
+
 REQUIRMENTS
 
-* arm-none-eabi toolchain from CodeSourcery/Mentor : https://sourcery.mentor.com/sgpp/lite/arm/portal/release2032
+* arm-none-eabi gcc toolchain from CodeSourcery/Mentor
+  https://sourcery.mentor.com/sgpp/lite/arm/portal/release2032
+
+  With the arm-none-eabi toolchain in your path, you should be able
+  to build simple.elf by just running 'make'
 
 * openocd 0.5.0 : http://sourceforge.net/projects/openocd/
-  Build with ./configure --enable-jlink
-  You'll probably need to install libusb-dev (apt-get/ubuntu) or libusb-devel (yum/fedora) first.
+  If you're using a Segger/Atmel SAM-ICE jtag debugger, build with
+  $ ./configure --enable-jlink
+  $ make
+  $ sudo make install
+  You'll probably need to install libusb-dev (apt-get/ubuntu)
+  or libusb-devel (yum/fedora) first.
   * openocd.cfg file included in repository root 
+
   To see openocd connects to the chip:
   * Run openocd from a terminal at repository root (openocd.cfg present)
   * In another terminal, $ telnet localhost 4444
   * In telnet, type "reset", see the chip do as you asked
+
+  To use openocd to load simple.elf:
+  * As before, run openocd from a terminal at the repository root
+  * In another terminal in simple/, run $ arm-none-eabi-gdb simple.elf
+  * In gdb: (gdb) target remote :4444
+            (gdb) monitor halt
+            (gdb) load
+            (gdb) break main
+            (gdb) continue
+            ...
+            Breakpoint 1, main () at simple.c:...
+            (gdb) continue
 
 RESOURCES
 
