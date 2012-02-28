@@ -31,8 +31,12 @@ define target-dir-objects
 
 $(eval $1_objs += $$(addprefix $2/,$3))
 
-$2/%.o: $2/%.c
-	$(CC) $(CFLAGS) $3 -c -o $$@ $$<
+$(foreach obj,$3,
+$(call target-dir-object-cflags,$2/$(obj),$4))
 
+endef
+
+define target-dir-object-cflags
+$1: CFLAGS := $(CFLAGS) $2
 endef
 

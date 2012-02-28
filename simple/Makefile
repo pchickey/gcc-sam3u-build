@@ -68,16 +68,8 @@ LDSCRIPT := $(AT91LIB)/boards/$(BOARD)/$(CHIP)/flash.lds
 simple_objs := simple.o
 
 simple_libs := at91lib_board at91lib_peripherals at91lib_utility
-# eventaully, the following should work:
-# $(call gen-target,simple)
-# but right now my make macro foo is lacking
 
-$(call gen-target-dir-objects,simple,at91lib_board)
-$(call gen-target-dir-objects,simple,at91lib_peripherals)
-$(call gen-target-dir-objects,simple,at91lib_utility)
-
-%.o: %.c
-	$(CC) $(CFLAGS) -c -o $@ $<
+$(eval $(call gen-target,simple))
 
 simple.elf: $(simple_objs)
 	$(LD) $(LDFLAGS) -T $(LDSCRIPT) -o $@ $^ $(LIBS)
