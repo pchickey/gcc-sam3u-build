@@ -2,6 +2,8 @@
 TOP := $(realpath $(dir $(lastword $(MAKEFILE_LIST))))
 LIBDIR := $(TOP)/libs
 
+include $(TOP)/toolchain.mk
+
 # gen-target
 # 
 # $1: target_name
