@@ -13,10 +13,6 @@ AR := $(TC)ar
 # Compiler Flags
 # ########################################################################### #
 
-INCLUDES := -I$(AT91LIB) \
-            -I$(AT91LIB)/peripherals \
-            -I$(AT91LIB)/boards/$(BOARD)
-
 OPTIMIZATION = -Os
 
 CFLAGS := -std=c99 -Wall -mthumb -mcpu=cortex-m3 \

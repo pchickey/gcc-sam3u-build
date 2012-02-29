@@ -1,7 +1,4 @@
 
-TOP := $(realpath $(dir $(lastword $(MAKEFILE_LIST))))
-LIBDIR := $(TOP)/libs
-
 include $(TOP)/toolchain.mk
 
 # gen-target
@@ -13,6 +10,9 @@ $1.elf: $($1_objs)
 	$(LD) $(LDFLAGS) -T $(LDSCRIPT) -o $$@ $$^ $(LIBS)
 $(foreach lib,$($1_libs),
 $(call gen-target-lib-depends,$1.elf,$(lib)))
+
+$(foreach obj,$($1_objs),
+$(call object-cflags,$(obj),$($1_cflags)))
 
 clean_$1: $(addprefix clean_,$($1_libs))
 	-rm $($1_objs)
@@ -73,6 +73,7 @@ $1: CFLAGS := $(CFLAGS) $2
 endef
 
 include $(TOP)/at91lib/tgt.mk
+include $(TOP)/freertos/tgt.mk
 
 $(LIBDIR):
 	mkdir -p $(LIBDIR)
