@@ -43,7 +43,7 @@ REQUIRMENTS
   To use openocd to load simple.elf:
   * As before, run openocd from a terminal at the repository root
   * In another terminal in simple/, run $ arm-none-eabi-gdb simple.elf
-  * In gdb: (gdb) target remote :4444
+  * In gdb: (gdb) target remote :3333
             (gdb) monitor halt
             (gdb) load
             (gdb) break main
