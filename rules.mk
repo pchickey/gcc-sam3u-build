@@ -42,7 +42,7 @@ endef
 # $2: objects
 
 define gen-lib
-$(LIBDIR)/$1.a: $2
+$(LIBDIR)/$1.a: $2 $(LIBDIR)
 	$(AR) rcs $(LIBDIR)/$1.a $2
 
 clean_$1:
