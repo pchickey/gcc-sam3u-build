@@ -1,9 +1,8 @@
 
-#include <stdint.h>
-
 #include <utility/trace.h>
 
-uint32_t fib(uint32_t);
+int fib(int);
+int result[20];
 
 void main (void) {
   
@@ -11,14 +10,16 @@ void main (void) {
   TRACE_INFO("hello world\n\n\n");
 
   while (1) {
-    for (uint32_t i = 0; i < 48; i++) {
-      TRACE_INFO("fib %ld = %ld\n",i, fib(i));
+    for (int i = 0; i < 20; i++) {
+      int r = fib(i);
+      result[i] = r;
+      TRACE_INFO("v7 fib %d = %d\n",i,r);
     }
   }
 }
 
 
-uint32_t fib (uint32_t n) {
+int fib (int n) {
   if (n == 0) return 0;
   if (n == 1) return 1;
   return fib(n-1) + fib(n-2); // Just to abuse the stack a bit.
