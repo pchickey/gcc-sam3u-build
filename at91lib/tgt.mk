@@ -41,7 +41,19 @@ at91lib_peripherals_cflags := -I$(AT91LIB)/boards/$(BOARD) \
 															-I$(AT91LIB)
 
 at91lib_utility_path := $(AT91LIB)
-at91lib_utility_objs := utility/trace.o utility/stdio.o
+at91lib_utility_objs := $(addprefix utility/,\
+													bmp.o \
+													clock.o \
+													hamming.o \
+													led.o \
+													math.o \
+													rand.o \
+													retarget.o \
+													stdio.o \
+													string.o \
+													trace.o \
+													video.o \
+													wav.o)
 at91lib_utility_cflags := -I$(AT91LIB)/boards/$(BOARD) \
 													-I$(AT91LIB)/peripherals \
 													-I$(AT91LIB)
