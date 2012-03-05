@@ -70,10 +70,12 @@ endef
 #
 define object-cflags
 $1: CFLAGS := $(CFLAGS) $2
+$1: ASFLAGS := $(ASFLAGS) $2
 endef
 
 include $(TOP)/at91lib/tgt.mk
 include $(TOP)/freertos/tgt.mk
+include $(TOP)/cmsis/tgt.mk
 
 $(LIBDIR):
 	mkdir -p $(LIBDIR)
