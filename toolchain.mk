@@ -6,6 +6,7 @@
 TC := arm-none-eabi-
 
 CC := $(TC)gcc
+CXX := $(TC)g++
 LD := $(TC)gcc
 AR := $(TC)ar
 
@@ -16,6 +17,10 @@ AR := $(TC)ar
 OPTIMIZATION = -Os
 
 CFLAGS := -std=c99 -Wall -mthumb -mcpu=cortex-m3 \
+          -mlong-calls -ffunction-sections -g \
+          $(OPTIMIZATION) $(INCLUDES) -D$(CHIP) \
+          -DTRACE_LEVEL=$(TRACE_LEVEL)
+CXXFLAGS := -Wall -mthumb -mcpu=cortex-m3 \
           -mlong-calls -ffunction-sections -g \
           $(OPTIMIZATION) $(INCLUDES) -D$(CHIP) \
           -DTRACE_LEVEL=$(TRACE_LEVEL)
