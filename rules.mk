@@ -76,6 +76,7 @@ endef
 
 include $(TOP)/at91lib/tgt.mk
 include $(TOP)/freertos/tgt.mk
+include $(TOP)/freertos/serial/tgt.mk
 include $(TOP)/cmsis/tgt.mk
 include $(TOP)/arduino-core/tgt.mk
 include $(TOP)/cplusplus/tgt.mk
