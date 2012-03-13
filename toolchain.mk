@@ -9,6 +9,7 @@ CC := $(TC)gcc
 CXX := $(TC)g++
 LD := $(TC)gcc
 AR := $(TC)ar
+OBJCOPY := $(TC)objcopy
 
 # ########################################################################### #
 # Compiler Flags
@@ -32,5 +33,5 @@ ASFLAGS := -mcpu=cortex-m3 -mthumb -Wall -g \
 LDFLAGS := -g $(OPTIMIZATION) -nostartfiles -mthumb -mcpu=cortex-m3 \
            -Wl,--gc-sections
 
-LDSCRIPT := $(AT91LIB)/boards/$(BOARD)/$(CHIP)/flash.lds
+LDSCRIPT := $(AT91LIB)/boards/$(BOARD)/$(CHIP)/cxx_flash.ld
 
