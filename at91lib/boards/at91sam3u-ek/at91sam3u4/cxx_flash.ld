@@ -33,7 +33,7 @@
 
 OUTPUT_FORMAT("elf32-littlearm", "elf32-littlearm", "elf32-littlearm")
 OUTPUT_ARCH(arm)
-SEARCH_DIR(.)
+ENTRY(ResetException)
 
 /* Memory Spaces Definitions */
 MEMORY
@@ -42,9 +42,11 @@ MEMORY
 	flash1 (W!RX) : ORIGIN = 0x00100000, LENGTH = 0x00020000 /* Flash1, 128K */
 	sram0  (W!RX) : ORIGIN = 0x20000000, LENGTH = 0x00008000 /* Sram0, 32K */
 	sram1  (W!RX) : ORIGIN = 0x20080000, LENGTH = 0x00004000 /* Sram1, 16K */
-	rom (rx)    : ORIGIN = ORIGIN(flash1)-LENGTH(flash0), LENGTH = LENGTH(flash0)+LENGTH(flash1) /* Flash, 256K */
-	ram (rwx)   : ORIGIN = ORIGIN( sram1)-LENGTH( sram0), LENGTH = LENGTH( sram0)+LENGTH( sram1) /* sram, 48K */
 }
+
+/* Vector Definition */
+/* vector is put at very begin adress of SRAM0, the preserved size is 0x100 */
+_vect_start = 0x20000000;
 
 /* The stack size used by the application. NOTE: you need to adjust  */
 STACK_SIZE = 0x2000;
