@@ -24,7 +24,7 @@ REQUIRMENTS
   https://sourcery.mentor.com/sgpp/lite/arm/portal/release2032
 
   With the arm-none-eabi toolchain in your path, you should be able
-  to build simple.elf by just running 'make'
+  to build simple.elf by just running 'make' in the simple/ directory.
 
 * openocd 0.5.0 : http://sourceforge.net/projects/openocd/
   If you're using a Segger/Atmel SAM-ICE jtag debugger, build with
@@ -37,8 +37,14 @@ REQUIRMENTS
 
   To see openocd connects to the chip:
   * Run openocd from a terminal at repository root (openocd.cfg present)
-  * In another terminal, $ telnet localhost 4444
-  * In telnet, type "reset", see the chip do as you asked
+  * In another terminal,
+    $ telnet localhost 4444
+  * In telnet session, the following commands will flash the chip with the
+    program built in the simple/ directory:
+    > halt
+    > flash write_image simple/simple.elf
+    > reset run
+    > exit
 
   To use openocd to load simple.elf:
   * As before, run openocd from a terminal at the repository root
@@ -51,6 +57,9 @@ REQUIRMENTS
             ...
             Breakpoint 1, main () at simple.c:...
             (gdb) continue
+  * If gdb refuses to connect, follow the instructions above to connect to
+    openocd via telnet, use just the "halt" command, then exit telnet. After
+    that gdb should connect fine.
 
 RESOURCES
 
