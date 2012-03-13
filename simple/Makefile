@@ -10,7 +10,7 @@ simple_cflags := -I$(AT91LIB) \
             -I$(AT91LIB)/peripherals \
             -I$(AT91LIB)/boards/$(BOARD) \
 
-default: simple.elf
+default: simple
 
 # Include rules.mk last in each Makefile
 include ../rules.mk

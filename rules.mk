@@ -6,8 +6,15 @@ include $(TOP)/toolchain.mk
 # $1: target_name
 #
 define gen-target
+
+.PHONY: $1
+$1: $1.elf $1.hex
+
 $1.elf: $($1_objs)
 	$(LD) $(LDFLAGS) -T $(LDSCRIPT) -o $$@ $$^ $(LIBS)
+$1.hex: $1.elf
+	$(OBJCOPY) -O ihex $1.elf $1.hex
+
 $(foreach lib,$($1_libs),
 $(call gen-target-lib-depends,$1.elf,$(lib)))
 
@@ -17,6 +24,7 @@ $(call object-cflags,$(obj),$($1_cflags)))
 clean_$1: $(addprefix clean_,$($1_libs))
 	-rm $($1_objs)
 	-rm $1.elf
+	-rm $1.hex
 endef
 
 # gen-target-lib-depends
