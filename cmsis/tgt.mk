@@ -2,5 +2,5 @@
 libs += cmsis
 
 cmsis_path := $(CMSIS)
-cmsms_objs := core_cm3.o
+cmsis_objs := core_cm3.o syscalls_sam3.o
 
