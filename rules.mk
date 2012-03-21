@@ -11,7 +11,7 @@ define gen-target
 $1: $1.elf $1.hex
 
 $1.elf: $($1_objs)
-	$(LD) $(LDFLAGS) -T $(LDSCRIPT) -o $$@ $$^ $(LIBS)
+	$(LD) $(LDFLAGS) -T $(LDSCRIPT) -o $$@ $$^ -lc $$(filter %.a,$$^)
 $1.hex: $1.elf
 	$(OBJCOPY) -O ihex $1.elf $1.hex
 
