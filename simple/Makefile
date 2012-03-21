@@ -6,7 +6,7 @@ targets += simple
 
 simple_objs := simple.o
 simple_libs := at91lib_board at91lib_peripherals at91lib_utility
-simple_cflags := -I$(AT91LIB) \
+simple_cflags := -std=c99 -I$(AT91LIB) \
             -I$(AT91LIB)/peripherals \
             -I$(AT91LIB)/boards/$(BOARD) \
 

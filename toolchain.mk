@@ -17,7 +17,7 @@ OBJCOPY := $(TC)objcopy
 
 OPTIMIZATION = -Os
 
-CFLAGS := -std=c99 -Wall -mthumb -mcpu=cortex-m3 \
+CFLAGS := -Wall -mthumb -mcpu=cortex-m3 \
           -mlong-calls -ffunction-sections -g \
           $(OPTIMIZATION) $(INCLUDES) -D$(CHIP) \
           -DTRACE_LEVEL=$(TRACE_LEVEL)
