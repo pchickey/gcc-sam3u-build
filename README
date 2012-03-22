@@ -26,11 +26,20 @@ REQUIRMENTS
   With the arm-none-eabi toolchain in your path, you should be able
   to build simple.elf by just running 'make' in the simple/ directory.
 
-* openocd 0.5.0 : http://sourceforge.net/projects/openocd/
-  If you're using a Segger/Atmel SAM-ICE jtag debugger, build with
+* openocd 0.6 Development HEAD : http://sourceforge.net/projects/openocd/
+  The openocd 0.5.0 release does not work properly with the SAM3U. You'll
+  need to checkout and build openocd from sources. This requires automake
+  libtool, autoconf, and libinfo to be installed on your system.
+  When using a repository checkout, autoconf needs to be bootstrapped:
+  $ ./bootstrap
+  If you're using a Segger/Atmel SAM-ICE jtag debugger, build with:
   $ ./configure --enable-jlink
   $ make
   $ sudo make install
+
+  Other jtag debugger hardware requires specific options to ./configure - see
+  the openocd readme for more options.
+
   You'll probably need to install libusb-dev (apt-get/ubuntu)
   or libusb-devel (yum/fedora) first.
   * openocd.cfg file included in repository root 
