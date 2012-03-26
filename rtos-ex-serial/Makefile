@@ -7,7 +7,8 @@ rtos_serial_objs := rtos_serial.o rtos_cstartup_gnu.o
 rtos_serial_libs := at91lib_board at91lib_peripherals at91lib_utility \
 										freertos_port_cm3 freertos_src \
 										arduino_core cplusplus \
-										freertos_serial
+										freertos_serial \
+										syscalls
 rtos_serial_cflags := -std=c99 -I$(AT91LIB) \
             -I$(AT91LIB)/peripherals \
             -I$(AT91LIB)/boards/$(BOARD) \
