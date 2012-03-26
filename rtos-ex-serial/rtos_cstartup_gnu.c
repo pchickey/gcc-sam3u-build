@@ -48,6 +48,7 @@ extern unsigned int _vect_start;
 extern unsigned int _sfixed;
 extern unsigned int _sfixed;
 extern unsigned int _efixed;
+extern unsigned int _etext;
 extern unsigned int _srelocate;
 extern unsigned int _erelocate;
 extern unsigned int _szero;
@@ -145,7 +146,7 @@ void ResetException(void)
 #endif
 
     // Initialize data
-    pSrc = &_efixed;
+    pSrc = &_etext;
     pDest = &_srelocate;
     if (pSrc != pDest) {
         for(; pDest < &_erelocate;) {
