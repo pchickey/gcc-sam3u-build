@@ -88,6 +88,7 @@ include $(TOP)/freertos/serial/tgt.mk
 include $(TOP)/cmsis/tgt.mk
 include $(TOP)/arduino-core/tgt.mk
 include $(TOP)/cplusplus/tgt.mk
+include $(TOP)/syscalls/tgt.mk
 
 $(LIBDIR):
 	mkdir -p $(LIBDIR)

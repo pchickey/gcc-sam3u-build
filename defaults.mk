@@ -12,3 +12,4 @@ FREERTOS_PORT := $(FREERTOS)/portable/GCC/ARM_CM3
 CMSIS := $(TOP)/cmsis
 ARDUINOCORE := $(TOP)/arduino-core
 CPLUSPLUS := $(TOP)/cplusplus
+SYSCALLS := $(TOP)/syscalls
