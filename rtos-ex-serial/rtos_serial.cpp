@@ -6,7 +6,12 @@ extern "C" {
 
 #include <FreeRTOS.h>
 #include <task.h>
+#include <semphr.h>
 }
+
+#define PRINTING_TIMEOUT ( (portTickType) 50 )
+
+xSemaphoreHandle printing_semphr;
 
 void * fib_task_handle;
 void fib_task_func(void *);
@@ -19,7 +24,9 @@ extern "C" {
     
     TRACE_CONFIGURE(TRACE_DBGU, 115200, BOARD_MCK);
     TRACE_INFO("entered main\n\n\n");
-    
+
+    vSemaphoreCreateBinary(printing_semphr);
+
     xTaskCreate(fib_task_func, (signed portCHAR *)"fibt", 400,
                 NULL, 1, &fib_task_handle);
 
@@ -43,20 +50,48 @@ uint16_t rad (uint16_t n) {
 }
 
 void fib_task_func (void * args) {
-  TRACE_INFO("fib task started\n");
+
+  if ( xSemaphoreTake( printing_semphr, PRINTING_TIMEOUT ) == pdTRUE ) {
+    TRACE_INFO("fib task started\n\n");
+    xSemaphoreGive( printing_semphr );
+  } else {
+    for(;;);
+  }
+
   while (1) {
     for (uint16_t i = 0; i < 20; i++) {
-      TRACE_INFO("fib %d = %d\n",i, fib(i));
+      uint16_t res = fib(i);
+      if ( xSemaphoreTake( printing_semphr, PRINTING_TIMEOUT ) == pdTRUE ) {
+        TRACE_INFO("fib %d = %d\n",i,res);
+        xSemaphoreGive( printing_semphr );
+      } else {
+        TRACE_ERROR("fib task failed to take printing semphr\n");
+        for(;;);
+      }
       taskYIELD();
     }
   }
 }
 
 void rad_task_func (void * args) {
-  TRACE_INFO("rad task started\n");
+
+  if ( xSemaphoreTake( printing_semphr, PRINTING_TIMEOUT ) == pdTRUE ) {
+    TRACE_INFO("rad task started\n\n");
+    xSemaphoreGive( printing_semphr );
+  } else {
+    for(;;);
+  }
+
   while (1) {
     for (uint16_t i = 0; i < 10; i++) {
-      TRACE_INFO("rad %d = %d\n",i, rad(i));
+      uint16_t res = rad(i);
+      if ( xSemaphoreTake( printing_semphr, PRINTING_TIMEOUT ) == pdTRUE ) {
+        TRACE_INFO("rad %d = %d\n",i,res);
+        xSemaphoreGive( printing_semphr );
+      } else {
+        TRACE_ERROR("rad task failed to take printing semphr\n");
+        for(;;);
+      }
       taskYIELD();
     }
   }
@@ -67,8 +102,10 @@ extern "C" {
   /* FreeRTOS Callbacks */
   void vApplicationTickHook(void) {
     static int i = 0;
-    if (i < 1000) i++;
-    else { TRACE_INFO("tick\n"); i = 0; }
+    if (i >= 1000) {
+      i = 0; 
+      TRACE_INFO("tick\n"); /* This is unsafe! */
+    } else i++;
   }
 
   void vApplicationStackOverflowHook(void) {
